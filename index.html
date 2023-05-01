@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TASKS LIST</title>
+
+</head>
+<style>
+    :root input {
+        outline: none;
+        border-radius: 6px;
+        border: none;
+
+    }
+
+    :root button {
+        border: none;
+
+    }
+
+    body {
+        /* display: grid;
+        grid-template-columns: 1fr 1fr; */
+        /* margin: 0; */
+        color: antiquewhite;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        top: 0;
+        padding: 0;
+        background: rgb(94, 128, 206);
+
+    }
+
+    .task_card {
+        display: flex;
+        justify-content: space-around;
+        /* text-decoration: line-through; */
+        align-items: center;
+        /* padding: 0 20px; */
+        /* grid-template-rows: 1fr 1fr 1fr 1fr; */
+    }
+
+    .container {
+        height: 80vh;
+        backdrop-filter: blur(12px);
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .task_add {
+        width: 50vw;
+        padding: 4px 30px;
+
+    }
+
+    .close {
+        margin-left: 12px;
+        background-color: hotpink;
+        height: 23px;
+        padding: 0 15px;
+
+    }
+
+    .toggle_checked {
+        text-decoration: line-through black;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="task_append">
+            <input type="text" class="task_add">
+            <button onclick="createTask(this)" class="add">+</button>
+        </div>
+        <div id="task_list">
+        </div>
+    </div>
+    <script>
+        let task_curr=localStorage.length
+        let task_length = document.getElementsByClassName('task_card').length;
+        // let current_add_task = 1
+        let display_task = document.getElementById('task_list')
+        console.log(task_length);
+        function createTask(e) {
+
+            let parent_ = e.parentElement.querySelector('.task_add').value
+
+            if (parent_ != undefined || parent_ != null | parent_ != '') {
+                display_task.innerHTML += `<div class="task_card">
+                <input onclick="task_checked(this)" type="checkbox" name="checker" id="">
+                <p class="task">${parent_}</p>
+                <!-- <input type="text" class="edit_task"> -->
+                <button onclick="deleteTask(this)" class="close">&#10006</button>
+            </div>`
+            }
+            task_length += 1
+            current_add_task = 
+            localStorage.setItem(task_length, parent_)
+
+            // console.log(task_length);
+        }
+        function task_checked(value) {
+            let elem = value.parentElement.getElementsByClassName('task')[0]
+            // console.log(val);
+
+            localStorage.set
+            elem.classList.toggle("toggle_checked")
+        }
+        function deleteTask(elem) {
+            elem.parentElement.remove()
+            localStorage.removeItem(current_add_task)
+
+        }
+        function add_task(task, id) {
+            let obj_task = {
+                id: id,
+                task: task
+            }
+            return obj_task
+        }
+        let all_stored_task = localStorage.length
+        if (window.onstorage) {
+            for (let i = 1; i <= all_stored_task; i++) {
+                display_task.innerHTML += `<div class="task_card">
+                <input onclick="task_checked(this)" type="checkbox" name="checker" id="">
+                <p class="task">${localStorage[i]}</p>
+                <!-- <input type="text" class="edit_task"> -->
+                <button onclick="deleteTask(this)" class="close">&#10006</button>
+            </div>`
+            }
+
+        }
+        else{
+            for (let i = 1; i <= all_stored_task; i++) {
+            display_task.innerHTML+=    `<div class="task_card">
+                <input onclick="task_checked(this)" type="checkbox" name="checker" id="">
+                <p class="task">${localStorage[i]}</p>
+                <!-- <input type="text" class="edit_task"> -->
+                <button onclick="deleteTask(this)" class="close">&#10006</button>
+            </div>`       
+        }
+        }
+
+
+
+    </script>
+</body>
+
+</html>
